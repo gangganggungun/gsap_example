@@ -187,20 +187,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   workAnimation()
 
-  function serviceAnimation(){
+  const pcDataSpeed = ['200', '800', '600', '400'];
+  const mobileDataSpeed = ['100', '400', '300', '200'];
+
+  function serviceAnimation(speed){
+    
     const arrow_elmts = gsap.utils.toArray('.service-arrow');
 
-    arrow_elmts.forEach((num) => {
-      const data_speed = num.getAttribute('data-speed');
+    arrow_elmts.forEach((num, i) => {
+      console.log(speed[i]);
+      // const data_speed = num.getAttribute('data-speed');
 
       tl.from(num, {
         scrollTrigger: commonScrollTrigger.service,
-        x: -data_speed,
+        x: -speed[i],
       });
     });
   }
 
-  serviceAnimation()
+  
 
   function footerAnimation(){
     const footer_elmts = gsap.utils.toArray('.footer-wrapper span');
@@ -215,14 +220,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  footerAnimation()
+  footerAnimation();
 
   const wWidth = window.outerWidth;
 
   if (wWidth > 1300) {
     headerAnimation(-70);
+    serviceAnimation(pcDataSpeed)
   } else {
     headerAnimation(0);
+    serviceAnimation(mobileDataSpeed)
   }
 
   //================================
